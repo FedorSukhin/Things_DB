@@ -1,0 +1,42 @@
+﻿<Window x:Class="Things_DB.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Things_DB"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Name="Actions">
+            <MenuItem Header="Actions" FontSize="24">
+                <MenuItem Name="bdConnectionTest" Header="dbConnectionTest" Click="bdConnectionTest_Click" FontSize="24"/>
+                <MenuItem Name="allThings" Header="All things" Click="allThings_Click" FontSize="24"/>
+                <MenuItem Name="allTypes" Header="All types" Click="allTypes_Click" FontSize="24"/>
+                <MenuItem Name="allSupplyers" Header="allSupplyer" Click="allSupplyers_Click" FontSize="24"/>
+                <MenuItem Name="maxCount" Header="Max count" Click="maxCount_Click" FontSize="24"/>
+                <MenuItem Name="minCount" Header="Min count" Click="minCount_Click" FontSize="24"/>
+                <MenuItem Name="maxCost" Header="Max cost" Click="maxCost_Click" FontSize="24"/>
+                <MenuItem Name="minCost" Header="MIn cost" Click="minCost_Click" FontSize="24"/>
+            </MenuItem>
+        </Menu>
+        <!-- отображение режультата -->
+        <ListBox x:Name="ThingsListBox" Grid.Row="1" Grid.RowSpan="4" Grid.Column="0"/>
+        <ComboBox Name="paramChois" FontSize="24" Grid.Column="1">
+            <ComboBoxItem Name="paramType" IsSelected="True" Content="Type"/>
+            <ComboBoxItem Name="paramSypplyer" Content="Sypplyer"/>
+        </ComboBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Height="35" />\
+        <Button Name="Result" Content="Result" Click="Result_Click"/>
+    </Grid>
+</Window>

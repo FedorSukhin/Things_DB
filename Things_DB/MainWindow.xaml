@@ -23,7 +23,7 @@
                 <MenuItem Name="bdConnectionTest" Header="dbConnectionTest" Click="bdConnectionTest_Click" FontSize="24"/>
                 <MenuItem Name="allThings" Header="All things" Click="allThings_Click" FontSize="24"/>
                 <MenuItem Name="allTypes" Header="All types" Click="allTypes_Click" FontSize="24"/>
-                <MenuItem Name="allSupplyers" Header="allSupplyer" Click="allSupplyers_Click" FontSize="24"/>
+                <MenuItem Name="allSupplyers" Header="All supplyers" Click="allSupplyers_Click" FontSize="24"/>
                 <MenuItem Name="maxCount" Header="Max count" Click="maxCount_Click" FontSize="24"/>
                 <MenuItem Name="minCount" Header="Min count" Click="minCount_Click" FontSize="24"/>
                 <MenuItem Name="maxCost" Header="Max cost" Click="maxCost_Click" FontSize="24"/>
@@ -32,11 +32,11 @@
         </Menu>
         <!-- отображение режультата -->
         <ListBox x:Name="ThingsListBox" Grid.Row="1" Grid.RowSpan="4" Grid.Column="0"/>
-        <ComboBox Name="paramChois" FontSize="24" Grid.Column="1">
+        <ComboBox Name="paramChois" FontSize="24" Grid.Column="1" SelectionChanged="paramChois_SelectionChanged">
             <ComboBoxItem Name="paramType" IsSelected="True" Content="Type"/>
             <ComboBoxItem Name="paramSypplyer" Content="Sypplyer"/>
         </ComboBox>
-        <TextBox Grid.Row="1" Grid.Column="1" Height="35" />\
-        <Button Name="Result" Content="Result" Click="Result_Click"/>
+        <TextBox Name="Parametr" Grid.Row="1" Grid.Column="1" Height="35" />
+        <Button Name="Result" Content="Result" Grid.Column="1" Grid.Row="2" FontSize="24" MaxHeight="50" Width="150" Click="Result_Click"/>
     </Grid>
 </Window>

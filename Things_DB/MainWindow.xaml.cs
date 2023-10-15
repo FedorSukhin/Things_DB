@@ -23,6 +23,7 @@ namespace Things_DB
     public partial class MainWindow : Window
     {
         private DBthingsClient dbthingsClient;
+        private int qweryItem;
         public MainWindow()
         {
             dbthingsClient = new DBthingsClient(new ConnectionThingsDB());
@@ -32,15 +33,15 @@ namespace Things_DB
 
         private void bdConnectionTest_Click(object sender, RoutedEventArgs e)
         {
-            try 
+            try
             {
-            ConnectionThingsDB connectionThingsDB = new ConnectionThingsDB();
+                ConnectionThingsDB connectionThingsDB = new ConnectionThingsDB();
                 using (SqlConnection connection = connectionThingsDB.OpenDBConnection())
                 {
                     MessageBox.Show("Connection is ok", "Connected", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show($"Connection error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -76,36 +77,88 @@ namespace Things_DB
 
         private void allTypes_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                List<NameThigs> types = dbthingsClient.TypeAll();
+                ThingsListBox.Items.Clear();
+                types.ForEach(type => ThingsListBox.Items.Add(type));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void allSupplyers_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                List<NameThigs> types = dbthingsClient.SupplierAll();
+                ThingsListBox.Items.Clear();
+                types.ForEach(supplier => ThingsListBox.Items.Add(supplier));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
         private void maxCount_Click(object sender, RoutedEventArgs e)
         {
-
+            List<Things> things = dbthingsClient.maxCount();
+            ThingsListBox.Items.Clear();
+            things.ForEach(thing => ThingsListBox.Items.Add(thing));
         }
 
         private void minCount_Click(object sender, RoutedEventArgs e)
         {
-
+            List<Things> things = dbthingsClient.minCount();
+            ThingsListBox.Items.Clear();
+            things.ForEach(thing => ThingsListBox.Items.Add(thing));
         }
 
         private void minCost_Click(object sender, RoutedEventArgs e)
         {
-
-        } 
+            List<Things> things = dbthingsClient.minCost();
+            ThingsListBox.Items.Clear();
+            things.ForEach(thing => ThingsListBox.Items.Add(thing));
+        }
         private void maxCost_Click(object sender, RoutedEventArgs e)
         {
-
+            List<Things> things = dbthingsClient.maxCost();
+            ThingsListBox.Items.Clear();
+            things.ForEach(thing => ThingsListBox.Items.Add(thing));
         }
+
 
         private void Result_Click(object sender, RoutedEventArgs e)
         {
 
+            try
+            {
+                if (qweryItem == 0)
+                {
+                    List<Things> things = dbthingsClient.ChoisType(Parametr.Text);
+                    ThingsListBox.Items.Clear();
+                    things.ForEach(thing => ThingsListBox.Items.Add(thing));
+                }
+                if (qweryItem == 1)
+                {
+                    List<Things> things = dbthingsClient.ChoisSupplier(Parametr.Text);
+                    ThingsListBox.Items.Clear();
+                    things.ForEach(thing => ThingsListBox.Items.Add(thing));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void paramChois_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            qweryItem = paramChois.SelectedIndex;
         }
     }
 }
